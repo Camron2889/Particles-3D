@@ -18,6 +18,13 @@ particlejs._precomp = particlejs._precomp || {};
     
     const proto = Color.prototype;
     
+    proto.set = function(r, g, b, a) {
+        this.r = r;
+        this.g = g;
+        this.b = b;
+        this.a = a || this.a;
+    };
+    
     proto.fromHsl = function(h, s, l) {
         const c = (1 - Math.abs(2 * l - 1)) * s;
         const x = c * (1 - Math.abs(18 * h / 3 % 2 - 1));
