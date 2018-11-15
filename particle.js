@@ -6,13 +6,14 @@ particlejs._precomp = particlejs._precomp || {};
 (function() {
     "use strict";
     
-    const Point = function(x = 0, y = 0, z = 0, r = 1) {
+    const Particle = function(x = 0, y = 0, z = 0, r = 1) {
         this.x = x;
         this.y = y;
         this.z = z;
+        this.radius = r;
     }
     
-    const proto = Point.prototype;
+    const proto = Particle.prototype;
     
-    particlejs.Point = Point;
+    particlejs.Particle = Particle;
 });
