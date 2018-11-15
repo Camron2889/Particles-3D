@@ -1,15 +1,13 @@
-//namespace
-this.particlejs = this.particlejs || {};
-particlejs._precomp = particlejs._precomp || {};
+//requires: vector3.js color.js
 
 //class
 (function() {
     "use strict";
     
+    //constructor
     const Particle = function(x = 0, y = 0, z = 0, r = 1) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
+        this.position = new Vector3(x, y, z);
+        this.color = new Color();
         this.radius = r;
     }
     
