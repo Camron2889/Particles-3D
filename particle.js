@@ -9,9 +9,13 @@
         this.position = new Vector3(x, y, z);
         this.color = new Color();
         this.radius = r;
-    }
+    };
     
     const proto = Particle.prototype;
+    
+    proto.clone = function() {
+        
+    };
     
     particlejs.Particle = Particle;
 });

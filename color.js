@@ -81,7 +81,7 @@ particlejs._precomp = particlejs._precomp || {};
             h: h,
             s: s,
             l: l
-        }
+        };
     };
     
     particlejs.Color = Color;
