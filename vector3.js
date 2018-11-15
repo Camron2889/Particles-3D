@@ -14,32 +14,42 @@ this.particlejs = this.particlejs || {};
     
     proto.rotateZ = function(t) {
       const pos = this.pos;
-      const x1 = pos[0] * Math.cos(t) - pos[1] * Math.sin(t);
-      const y1 = pos[0] * Math.sin(t) + pos[1] * Math.cos(t);
+      const cosT = Math.cos(t);
+      const sinT = Math.sin(t);
+      const x1 = pos[0] * cosT - pos[1] * sinT;
+      const y1 = pos[0] * sinT + pos[1] * cosT;
       pos[0] = x1;
       pos[1] = y1;
+      return this;
     };
     
     proto.rotateY = function(t) {
       const pos = this.pos;
-      const z1 = pos[2] * Math.cos(t) - pos[0] * Math.sin(t);
-      const x1 = pos[2] * Math.sin(t) + pos[0] * Math.cos(t);
+      const cosT = Math.cos(t);
+      const sinT = Math.sin(t);
+      const z1 = pos[2] * cosT - pos[0] * sinT;
+      const x1 = pos[2] * sinT + pos[0] * cosT;
       pos[2] = z1;
       pos[0] = x1;
+      return this;
     };
     
     proto.rotateX = function(t) {
       const pos = this.pos;
-      const y1 = pos[1] * Math.cos(t) - pos[2] * Math.sin(t);
-      const z1 = pos[1] * Math.sin(t) + pos[2] * Math.cos(t);
+      const cosT = Math.cos(t);
+      const sinT = Math.sin(t);
+      const y1 = pos[1] * cosT - pos[2] * sinT;
+      const z1 = pos[1] * sinT + pos[2] * cosT;
       pos[1] = y1;
       pos[2] = z1;
+      return this;
     };
     
     proto.rotate = function(tx, ty, tz) {
       if (tz) this.rotateZ(tz);
       if (ty) this.rotateY(ty);
       if (tx) this.rotateX(tx);
+      return this;
     };
     
     proto.clone = function(target) {
