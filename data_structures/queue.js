@@ -8,8 +8,10 @@ this.particlejs = this.particlejs || {};
     //constructor
     const Queue = function() {
         this.head = null;
-        this.previous = null;
-        this.next = null;
+        
+        this.previousNode = null;
+        this.currentNode = null;
+        
         this.length = 0;
     };
     
@@ -17,26 +19,26 @@ this.particlejs = this.particlejs || {};
     
     proto.begin = function() {
         if (this.head) {
-            this.previous = null;
-            this.current = this.head;
+            this.previousNode = null;
+            this.currentNode = this.head;
             return this.head.value;
         }
         return null;
     };
     
     proto.next = function() {
-        if (this.current && this.current.next) {
-            this.previous = this.current;
-            this.current = this.current.next;
-            return this.current.value;
+        if (this.currentNode && this.currentNode.next) {
+            this.previousNode = this.currentNode;
+            this.currentNode = this.currentNode.next;
+            return this.currentNode.value;
         }
         return null;
     };
     
     proto.end = function() {
         if (this.begin()) {
-            while (this.next()) {};
-            return this.current.value;
+            while (this.next()) {}
+            return this.currentNode.value;
         }
         return null;
     };
@@ -54,13 +56,13 @@ this.particlejs = this.particlejs || {};
     
     proto.dequeue = function() {
         if (this.end()) {
-            const node = this.current;
-            if (this.previous) {
-                this.previous.next = null;
+            const node = this.currentNode;
+            if (this.previousNode) {
+                this.previousNode.next = null;
             }
             --this.length;
             if (this.length === 0) {
-                this.head = this.current = this.previous = null;
+                this.head = this.currentNode = this.previousNode = null;
             }
             return node.value;
         }
@@ -68,4 +70,16 @@ this.particlejs = this.particlejs || {};
     };
     
     particlejs.Queue = Queue;
-});
+})();
+
+
+//test
+const q = new particlejs.Queue();
+for (let i = 0; i < 20; i++) {
+    q.enqueue(i);
+}
+let str = q.begin() + "";
+while (q.next()) {
+    str += ", " + q.currentNode.value;
+}
+console.log(str);
