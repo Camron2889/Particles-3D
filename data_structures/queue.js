@@ -71,15 +71,3 @@ this.particlejs = this.particlejs || {};
     
     particlejs.Queue = Queue;
 })();
-
-
-//test
-const q = new particlejs.Queue();
-for (let i = 0; i < 20; i++) {
-    q.enqueue(i);
-}
-let str = q.begin() + "";
-while (q.next()) {
-    str += ", " + q.currentNode.value;
-}
-console.log(str);

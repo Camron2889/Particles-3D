@@ -83,4 +83,4 @@ this.particlejs = this.particlejs || {};
     };
     
     particlejs.Vector3 = Vector3;
-});
+})();
