@@ -36,7 +36,7 @@ this.particlejs = this.particlejs || {};
     };
     
     proto.end = function() {
-        if (this.begin()) {
+        if (this.begin() !== null) {
             while (this.next()) {}
             return this.currentNode.value;
         }
@@ -55,7 +55,7 @@ this.particlejs = this.particlejs || {};
     };
     
     proto.dequeue = function() {
-        if (this.end()) {
+        if (this.end() !== null) {
             const node = this.currentNode;
             if (this.previousNode) {
                 this.previousNode.next = null;
