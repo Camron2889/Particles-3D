@@ -58,7 +58,11 @@ particlejs._precomp = particlejs._precomp || {};
         return this;
     };
     
-    proto.getHsl = function(r, g, b) {
+    proto.getHsl = function() {
+        const r = this.r;
+        const g = this.g;
+        const b = this.b;
+        
         const max = Math.max(r, g, b);
         const min = Math.min(r, g, b);
         const range = max - min;
@@ -67,10 +71,10 @@ particlejs._precomp = particlejs._precomp || {};
         let s;
         const l = (max + min) / 2;
         
-        if (delta === 0) {
+        if (range === 0) {
             h = s = 0;
         } else {
-            s = delta / (1 - Math.abs(2 * l - 1));
+            s = range / (1 - Math.abs(2 * l - 1));
             h = 3/18;
             switch (max) {
                 case r:
