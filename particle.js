@@ -6,8 +6,9 @@
     
     //constructor
     const Particle = function(x = 0, y = 0, z = 0, r = 1) {
-        this.position = new Vector3(x, y, z);
-        this.color = new Color();
+        this.position = new particlejs.Vector3(x, y, z);
+        this.projected = new particlejs.Vector3();
+        this.color = new particlejs.Color();
         this.radius = r;
     };
     
