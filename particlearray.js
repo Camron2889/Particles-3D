@@ -1,8 +1,5 @@
 //requires: particle.js
 
-//namespace
-this.particlejs = this.particlejs || {};
-
 //class
 (function() {
     "use strict";
