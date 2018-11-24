@@ -66,7 +66,7 @@
             if (this.perspectiveProjection) {
                 screenPos.x = screenPos.x * halfWidth / (-screenPos.z * Math.tan(halfFov));
                 screenPos.y = screenPos.y * halfHeight / (-screenPos.z * Math.tan(halfVerticalFov));
-                particle.screenRadius = particle.Radius * halfWidth / (-local.pos[2] * Math.tan(halfFov));
+                particle.screenRadius = particle.Radius * halfWidth / (-screenPos.z * Math.tan(halfFov));
             }
             
             screenPos.x += halfWidth;
