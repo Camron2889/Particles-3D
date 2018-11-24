@@ -30,7 +30,7 @@
         this.stage = new createjs.Stage(this.canvas);
         
         //setup resizesensor
-        this.resizeSensor = new ResizeSensor(parentElement, this.fitElement.bind(this));
+        this.resizeSensor = new ResizeSensor(parentElement, this.fitParentElement.bind(this));
         
         //perspective
         this.worldAxes = new particlejs.Axis3();
@@ -72,7 +72,32 @@
             screenPos.x += halfWidth;
             screenPos.y += halfHeight;
         }
-    }
+    };
+    
+    proto.fitParentElement = function() {
+        if (!this.autoResize) return;
+        
+        const canvas = this.canvas;
+        const parentWidth = this.parentElement.clientWidth || this.parentElement.parentNode.clientWidth;
+        const parentHeight = this.parentElement.clientHeight || this.parentElement.parentNode.clientHeight;
+        const style = canvas.style;
+        
+        if (!this.preserveAspectRatio) {
+            canvas.style.marginTop = "0";
+            style.width = parentWidth + "px";
+            style.height = parentHeight + "px";
+        } else {
+            if (this.aspectRatio < parentWidth / parentHeight) { 
+                style.marginTop = "0";
+                style.width = Math.floor(parentHeight * this.aspectRatio) + "px";
+                style.height = parentHeight + "px";
+            } else {
+                style.marginTop = Math.floor((window.innerHeight - canvas.height) / 2) + "px";
+                style.width = parentWidth + "px";
+                style.height = Math.floor(parentWidth / this.aspectRatio) + "px";
+            }
+        }
+    };
     
     particlejs.Scene = Scene;
 })();
