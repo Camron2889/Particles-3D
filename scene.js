@@ -1,0 +1,78 @@
+//requires: easeljs.min.js resizesensor.min.js particlearray.js
+
+//class
+(function() {
+    "use strict";
+    
+    //shortcuts
+    const Vector3 = particlejs.Vector3;
+    
+    //constructor
+    const Scene = function(parentElement = document.body, width = 640, height = 480) {
+        this.parentElement = parentElement;
+        this.width = width;
+        this.height = height;
+        this.aspectRatio = width / height;
+        
+        //setup canvas
+        this.canvas = document.createElement("canvas");
+        this.parentElement.appendChild(this.canvas);
+        this.parentElement.style.overflow = "hidden";
+        this.canvas.setAttribute("style", "display: block; margin: auto; background-color: #000;");
+        this.preserveAspectRatio = true;
+        this.autoResize = true;
+        
+        //setup particles
+        this.particles = new particlejs.ParticleArray();
+
+        //setup easeljs
+        createjs.Ticker.interval = 1000 / 60;
+        this.stage = new createjs.Stage(this.canvas);
+        
+        //setup resizesensor
+        this.resizeSensor = new ResizeSensor(parentElement, this.fitElement.bind(this));
+        
+        //perspective
+        this.worldAxes = new particlejs.Axis3();
+        this.camera = {
+            position: new Vector3(0, 0, 600),
+            fov: Math.PI / 3
+        };
+        this.perspectiveProjection = false;
+    };
+    
+    const proto = Particle.prototype;
+    
+    proto.projectToScreen = function(particleArray) {
+        const halfWidth = this.width / 2;
+        const halfHeight = this.height / 2;
+        const halfFov = this.camera.fov / 2;
+        const halfVerticalFov = halfFov / this.aspectRatio;
+        
+        for (let i = 0; i < this.particles.length; i++) {
+            const particle = this.particles.at(i);
+           
+            const pos = particle.position;
+            const vx = this.worldAxes.x.clone().scale(po s.x);
+            const vy = this.worldAxes.y.clone().scale(pos.y);
+            const vz = this.worldAxes.z.clone().scale(pos.z);
+            
+            const screenPos = particle.screenPosition;
+            screenPos.set(0, 0, 0);
+            screenPos.add(vx).add(vy).add(vz);
+            
+            screenPos.subtract(this.camera.position);
+            
+            if (this.perspectiveProjection) {
+                screenPos.x = screenPos.x * halfWidth / (-screenPos.z * Math.tan(halfFov));
+                screenPos.y = screenPos.y * halfHeight / (-screenPos.z * Math.tan(halfVerticalFov));
+                particle.screenRadius = particle.Radius * halfWidth / (-local.pos[2] * Math.tan(halfFov));
+            }
+            
+            screenPos.x += halfWidth;
+            screenPos.y += halfHeight;
+        }
+    }
+    
+    particlejs.Scene = Scene;
+})();
