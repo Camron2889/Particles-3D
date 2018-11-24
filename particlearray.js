@@ -25,7 +25,7 @@
         return this._data.push(obj);
     };
     
-    proto.sortByVector3 = function(vectorName = "projected", coordinate = "z", direction = "increasing") {
+    proto.sortByVector3 = function(vectorName = "screenPosition", coordinate = "z", direction = "increasing") {
         let compare;
         if (direction === "increasing") {
             compare = function(a, b) { return a <= b };
