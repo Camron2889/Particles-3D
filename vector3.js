@@ -66,8 +66,9 @@ this.particlejs = this.particlejs || {};
     
     proto.clone = function(target) {
         target = target || new Vector3();
-        target.pos = this.pos.slice();
-        target.radius = this.radius;
+        target.x = this.x;
+        target.y = this.y;
+        target.z = this.z;
         
         return target;
     };
