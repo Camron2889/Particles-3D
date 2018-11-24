@@ -4,12 +4,22 @@
 (function() {
     "use strict";
     
+    //shortcuts
+    const Vector3 = particlejs.Vector3;
+    const Color = particlejs.Color;
+    
     //constructor
     const Particle = function(x = 0, y = 0, z = 0, r = 1) {
-        this.position = new particlejs.Vector3(x, y, z);
-        this.projected = new particlejs.Vector3();
-        this.color = new particlejs.Color();
+        this.position = new Vector3(x, y, z);
+        this.screenPosition = new Vector3();
+        
         this.radius = r;
+        this.screenRadius = r;
+        
+        this.color = new Color();
+        
+        this.enabled = true;
+        this.visible = true;
     };
     
     const proto = Particle.prototype;
