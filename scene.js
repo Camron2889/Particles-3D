@@ -40,7 +40,7 @@
             position: new Vector3(0, 0, 600),
             fov: Math.PI / 3
         };
-        this.perspectiveProjection = false;
+        this.perspectiveProjection = true;
     };
     
     const proto = Scene.prototype;
@@ -68,13 +68,30 @@
             if (this.perspectiveProjection) {
                 screenPos.x = screenPos.x * halfWidth / (-screenPos.z * Math.tan(halfFov));
                 screenPos.y = screenPos.y * halfHeight / (-screenPos.z * Math.tan(halfVerticalFov));
-                particle.screenRadius = particle.Radius * halfWidth / (-screenPos.z * Math.tan(halfFov));
+                particle.screenRadius = particle.radius * halfWidth / (-screenPos.z * Math.tan(halfFov));
             }
             
             screenPos.x += halfWidth;
             screenPos.y += halfHeight;
         }
     };
+    
+    proto.draw = function() {
+        const ctx = this.canvas.getContext("2d");
+        
+        ctx.clearRect(0, 0, this.width, this.height);
+        
+        for (let i = 0; i < this.particles.length; i++) {
+            const particle = this.particles.at(i);
+            const position = particle.screenPosition;
+            if (position.z < 0) {
+                ctx.beginPath();
+                ctx.arc(position.x, position.y, particle.screenRadius, 0, Math.PI * 2);
+                ctx.fillStyle = particle.color.toHex();
+                ctx.fill();
+            }
+        }
+    }
     
     proto.fitParentElement = function() {
         if (!this.autoResize) return;
