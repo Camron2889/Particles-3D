@@ -14,6 +14,12 @@ this.particlejs = this.particlejs || {};
     
     const proto = Vector3.prototype;
     
+    proto.set = function(x, y, z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
+    
     proto.rotateZ = function(t) {
         const cosT = Math.cos(t);
         const sinT = Math.sin(t);
@@ -70,6 +76,14 @@ this.particlejs = this.particlejs || {};
         this.x += otherV3.x;
         this.y += otherV3.y;
         this.z += otherV3.z;
+        
+        return this;
+    };
+    
+    proto.subtract = function(otherV3) {
+        this.x -= otherV3.x;
+        this.y -= otherV3.y;
+        this.z -= otherV3.z;
         
         return this;
     };
