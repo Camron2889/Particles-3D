@@ -16,6 +16,8 @@
         
         //setup canvas
         this.canvas = document.createElement("canvas");
+        this.canvas.width = width;
+        this.canvas.height = height;
         this.parentElement.appendChild(this.canvas);
         this.parentElement.style.overflow = "hidden";
         this.canvas.setAttribute("style", "display: block; margin: auto; background-color: #000;");
@@ -41,7 +43,7 @@
         this.perspectiveProjection = false;
     };
     
-    const proto = Particle.prototype;
+    const proto = Scene.prototype;
     
     proto.projectToScreen = function(particleArray) {
         const halfWidth = this.width / 2;
@@ -53,7 +55,7 @@
             const particle = this.particles.at(i);
            
             const pos = particle.position;
-            const vx = this.worldAxes.x.clone().scale(po s.x);
+            const vx = this.worldAxes.x.clone().scale(pos.x);
             const vy = this.worldAxes.y.clone().scale(pos.y);
             const vz = this.worldAxes.z.clone().scale(pos.z);
             
