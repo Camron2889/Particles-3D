@@ -25,7 +25,7 @@
         return this._data.push(obj);
     };
     
-    proto.sortByPosition = function(coordinate = "z", direction = "increasing") {
+    proto.sortByVector3 = function(vectorName = "projected", coordinate = "z", direction = "increasing") {
         let compare;
         if (direction === "increasing") {
             compare = function(a, b) { return a <= b };
@@ -38,12 +38,12 @@
                 return
             };
             
-            const pivot = this._data[right].position[coordinate];
+            const pivot = this._data[right][vectorName][coordinate];
             
             let center = left;
             
             for (let i = left; i <= right; i++) {
-                if (compare(this._data[i].position[coordinate], pivot)) {
+                if (compare(this._data[i][vectorName][coordinate], pivot)) {
                     //swap elements
                     const temp = this._data[center];
                     this._data[center] = this._data[i];
