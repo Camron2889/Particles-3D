@@ -16,6 +16,8 @@
         this.radius = r;
         this.screenRadius = r;
         
+        this.velocity = new Vector3();
+        
         this.color = new Color();
         
         this.enabled = true;
