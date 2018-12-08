@@ -16,12 +16,15 @@
         this.radius = r;
         this.screenRadius = r;
         
-        this.velocity = new Vector3();
-        
         this.color = new Color();
         
         this.enabled = true;
         this.visible = true;
+        
+        //physics
+        this.velocity = new Vector3();
+        this.charge = 0;
+        this.mass = 0;
     };
     
     const proto = Particle.prototype;
