@@ -91,7 +91,16 @@
                 ctx.fill();
             }
         }
-    }
+    };
+    
+    proto.stepPhysics = function() {
+        for (let i = 0; i < this.particles.length; i++) {
+            const particle = this.particles.at(i);
+            
+            particle.velocity.z -= this.worldGravity;
+            particle.position.add(particle.velocity);
+        }
+    };
     
     proto.fitParentElement = function() {
         if (!this.autoResize) return;
