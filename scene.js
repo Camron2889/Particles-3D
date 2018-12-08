@@ -36,11 +36,16 @@
         
         //perspective
         this.worldAxes = new particlejs.Axis3();
+        this.worldAngle = new Vector3(Math.PI / 2, 0, 0);
         this.camera = {
             position: new Vector3(0, 0, 600),
             fov: Math.PI / 3
         };
         this.perspectiveProjection = true;
+        
+        //physics
+        this.worldGravity = 9.8;
+        
     };
     
     const proto = Scene.prototype;
