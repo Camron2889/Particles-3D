@@ -14,7 +14,7 @@ particlejs._precomp = particlejs._precomp || {};
         this.g = g;
         this.b = b;
         this.a = a;
-    }
+    };
     
     const proto = Color.prototype;
     
