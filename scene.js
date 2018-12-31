@@ -46,6 +46,8 @@
         //physics
         this.worldGravity = 9.8;
         
+        this.worldGravity = 0;
+        this.electricForce = 0;
     };
     
     const proto = Scene.prototype;
@@ -103,6 +105,23 @@
             const particle = this.particles.at(i);
             
             particle.velocity.z -= this.worldGravity;
+            
+            if (this.electricForce !== 0) {
+                for (let j = 0; j < this.particles.length; j++) {
+                    if (i !== j) {
+                        const particle2 = this.particles.at(j);
+                        const difference = particle2.position.clone().subtract(particle.position);
+                        const direction = difference.getUnitVector();
+                        const radius = difference.getMagnitude();
+                        
+                        const force = particle.charge * particle2.charge / (radius * radius) * this.electricForce;
+                        
+                        particle.velocity.subtract(direction.clone().scale(force));
+                    }
+                }
+            }
+            
+            
             particle.position.add(particle.velocity);
         }
     };
