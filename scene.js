@@ -6,6 +6,7 @@
     
     //shortcuts
     const Vector3 = particlejs.Vector3;
+    const Color = particlejs.Color3;
     
     //constructor
     const Scene = function(parentElement = document.body, width = 640, height = 480) {
@@ -43,9 +44,14 @@
         };
         this.perspectiveProjection = true;
         
-        //physics
-        this.worldGravity = 9.8;
+        this.fog = {
+            enabled: false,
+            color: new Color(),
+            startDistance: 100,
+            width: 1000
+        };
         
+        //physics
         this.worldGravity = 0;
         this.electricForce = 0;
     };
