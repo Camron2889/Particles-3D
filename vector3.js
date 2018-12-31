@@ -97,8 +97,18 @@ this.particlejs = this.particlejs || {};
         return this;
     };
     
+    proto.normalize = function() {
+        const magnitude = this.getMagnitude();
+        this.scale(1 / magnitude);
+        return this;
+    };
+    
     proto.getMagnitude = function() {
         return Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
+    };
+    
+    proto.getUnitVector = function() {
+        return this.clone().normalize();
     };
     
     particlejs.Vector3 = Vector3;
