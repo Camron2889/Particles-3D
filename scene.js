@@ -121,8 +121,9 @@
                         const radius = difference.getMagnitude();
                         
                         const force = particle.charge * particle2.charge / (radius * radius) * this.electricForce;
+                        const deltaV = direction.clone().scale(force / particle.mass);
                         
-                        particle.velocity.subtract(direction.clone().scale(force));
+                        particle.velocity.subtract(deltaV);
                     }
                 }
             }
