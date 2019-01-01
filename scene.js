@@ -6,7 +6,7 @@
     
     //shortcuts
     const Vector3 = particlejs.Vector3;
-    const Color = particlejs.Color3;
+    const Color = particlejs.Color;
     
     //constructor
     const Scene = function(parentElement = document.body, width = 640, height = 480) {
