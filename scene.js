@@ -112,7 +112,7 @@
             
             particle.velocity.z -= this.worldGravity;
             
-            if (this.electricForce !== 0) {
+            if (this.electricForce !== 0 && particle.mass !== 0) {
                 for (let j = 0; j < this.particles.length; j++) {
                     if (i !== j) {
                         const particle2 = this.particles.at(j);
