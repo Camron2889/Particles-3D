@@ -60,5 +60,35 @@
         quicksort(0, this._data.length - 1);
     };
     
+    proto.quickSort = function(vectorName = "screenPosition", coordinate = "z", direction = "increasing") {
+        let compare = function(a, b) { return a <= b };
+            
+        const quicksort = function(left, right) {
+            if (left >= right) {
+                return
+            };
+            
+            const pivot = this._data[right][vectorName][coordinate];
+            
+            let center = left;
+            
+            for (let i = left; i <= right; i++) {
+                if (compare(this._data[i][vectorName][coordinate], pivot)) {
+                    //swap elements
+                    const temp = this._data[center];
+                    this._data[center] = this._data[i];
+                    this._data[i] = temp;
+                    
+                    ++center;
+                }
+            }
+            
+            quicksort(left, center - 2);
+            quicksort(center, right);
+        }.bind(this);
+        
+        quicksort(0, this._data.length - 1);
+    };
+    
     particlejs.ParticleArray = ParticleArray;
 })();
